@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interview Prep Tracker</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .section {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .progress {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🚀 Full Stack Interview Tracker</h1>
+
+<div class="progress">
+    Progress: <span id="progress">0%</span>
+</div>
+
+<div id="container"></div>
+
+<script>
+const data = {
+    "JavaScript": [
+        "Closures",
+        "Event Loop",
+        "Promises",
+        "Async Await",
+        "Debounce",
+        "Throttle",
+        "Prototype",
+        "Call Apply Bind",
+        "Memory Leak",
+        "Polyfills"
+    ],
+    "TypeScript": [
+        "Generics",
+        "Interfaces",
+        "Utility Types",
+        "Type Guards",
+        "Decorators"
+    ],
+    "React": [
+        "Hooks",
+        "Redux",
+        "Redux Toolkit",
+        "React Query",
+        "Performance",
+        "Context API",
+        "Fiber",
+        "Reconciliation",
+        "Micro Frontend"
+    ],
+    "NodeJS": [
+        "Event Loop",
+        "Streams",
+        "Worker Threads",
+        "JWT",
+        "RBAC",
+        "Security",
+        "Rate Limiting"
+    ],
+    "Database": [
+        "Joins",
+        "Indexes",
+        "Transactions",
+        "Query Optimization",
+        "PostgreSQL"
+    ],
+    "Redis": [
+        "Caching",
+        "PubSub",
+        "Distributed Lock"
+    ],
+    "System Design": [
+        "URL Shortener",
+        "Chat System",
+        "Notification System",
+        "Load Balancer",
+        "Microservices"
+    ],
+    "DevOps": [
+        "Docker",
+        "Kubernetes",
+        "CI/CD"
+    ]
+};
+
+const container = document.getElementById("container");
+
+function render() {
+    container.innerHTML = "";
+
+    Object.entries(data).forEach(([section, topics]) => {
+        const div = document.createElement("div");
+        div.className = "section";
+
+        div.innerHTML = `<h2>${section}</h2>`;
+
+        topics.forEach(topic => {
+            const key = `${section}-${topic}`;
+            const checked = localStorage.getItem(key) === "true";
+
+            const label = document.createElement("label");
+
+            label.innerHTML = `
+                <input type="checkbox"
+                    ${checked ? "checked" : ""}
+                    onchange="save('${key}', this.checked)">
+                ${topic}
+            `;
+
+            div.appendChild(label);
+        });
+
+        container.appendChild(div);
+    });
+
+    updateProgress();
+}
+
+function save(key, value) {
+    localStorage.setItem(key, value);
+    updateProgress();
+}
+
+function updateProgress() {
+    let total = 0;
+    let completed = 0;
+
+    Object.entries(data).forEach(([section, topics]) => {
+        topics.forEach(topic => {
+            total++;
+            const key = `${section}-${topic}`;
+
+            if (localStorage.getItem(key) === "true") {
+                completed++;
+            }
+        });
+    });
+
+    const percent = Math.round((completed / total) * 100);
+    document.getElementById("progress").innerText =
+        `${percent}% (${completed}/${total})`;
+}
+
+render();
+</script>
+
+</body>
+</html>
