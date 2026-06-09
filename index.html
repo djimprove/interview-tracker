@@ -1,179 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Interview Prep Tracker</title>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .section {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-        }
-
-        .progress {
-            font-size: 20px;
-            font-weight: bold;
-            color: green;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin: 8px 0;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="utf-8">
+<title>Interview Preparation Tracker</title>
+<style>
+body{font-family:Arial;margin:20px;max-width:1200px}
+details{border:1px solid #ddd;padding:10px;margin:10px 0;border-radius:8px}
+label{display:block;padding:4px}
+#search{width:100%;padding:10px;margin:10px 0}
+.progress{font-size:22px;font-weight:bold;margin:10px 0}
+button{padding:8px 12px;margin-right:8px}
+</style>
 </head>
 <body>
+<h1>Full Stack Interview Preparation Tracker</h1>
+<div class="progress">Progress: <span id="progress">0%</span></div>
+<input id="search" placeholder="Search topic...">
+<button onclick="resetProgress()">Reset</button>
+<button onclick="exportData()">Export</button>
+<input type="file" id="importFile">
 
-<h1>🚀 Full Stack Interview Tracker</h1>
-
-<div class="progress">
-    Progress: <span id="progress">0%</span>
-</div>
-
-<div id="container"></div>
+<details open><summary>Phase 1: JavaScript</summary><div class="items"><label><input type="checkbox" data-key="Phase 1: JavaScript-Execution Context"> Execution Context</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Call Stack"> Call Stack</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Event Loop"> Event Loop</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Microtask vs Macrotask Queue"> Microtask vs Macrotask Queue</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Closures"> Closures</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Scope Chain"> Scope Chain</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Hoisting"> Hoisting</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Prototype & Prototype Chain"> Prototype & Prototype Chain</label><label><input type="checkbox" data-key="Phase 1: JavaScript-this keyword"> this keyword</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Bind / Call / Apply"> Bind / Call / Apply</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Currying"> Currying</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Polyfills"> Polyfills</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Debounce"> Debounce</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Throttle"> Throttle</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Promise"> Promise</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Promise.all / race / allSettled / any"> Promise.all / race / allSettled / any</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Async Await"> Async Await</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Memory Leaks"> Memory Leaks</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Garbage Collection"> Garbage Collection</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Generators"> Generators</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Iterators"> Iterators</label><label><input type="checkbox" data-key="Phase 1: JavaScript-WeakMap / WeakSet"> WeakMap / WeakSet</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Symbol"> Symbol</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Module System"> Module System</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Tree Shaking"> Tree Shaking</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Event Delegation"> Event Delegation</label><label><input type="checkbox" data-key="Phase 1: JavaScript-Design Patterns"> Design Patterns</label><label><input type="checkbox" data-key="Phase 1: JavaScript-SOLID Principles"> SOLID Principles</label></div></details><details open><summary>Phase 2: TypeScript</summary><div class="items"><label><input type="checkbox" data-key="Phase 2: TypeScript-Types"> Types</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Interfaces"> Interfaces</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Type Aliases"> Type Aliases</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Enums"> Enums</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Generics"> Generics</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Utility Types"> Utility Types</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Mapped Types"> Mapped Types</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Conditional Types"> Conditional Types</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Infer Keyword"> Infer Keyword</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Declaration Merging"> Declaration Merging</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Type Guards"> Type Guards</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Custom Types"> Custom Types</label><label><input type="checkbox" data-key="Phase 2: TypeScript-Decorators"> Decorators</label></div></details><details open><summary>Phase 3: React</summary><div class="items"><label><input type="checkbox" data-key="Phase 3: React-Virtual DOM"> Virtual DOM</label><label><input type="checkbox" data-key="Phase 3: React-Reconciliation"> Reconciliation</label><label><input type="checkbox" data-key="Phase 3: React-Fiber Architecture"> Fiber Architecture</label><label><input type="checkbox" data-key="Phase 3: React-Component Lifecycle"> Component Lifecycle</label><label><input type="checkbox" data-key="Phase 3: React-Hooks Internals"> Hooks Internals</label><label><input type="checkbox" data-key="Phase 3: React-useState"> useState</label><label><input type="checkbox" data-key="Phase 3: React-useEffect"> useEffect</label><label><input type="checkbox" data-key="Phase 3: React-useMemo"> useMemo</label><label><input type="checkbox" data-key="Phase 3: React-useCallback"> useCallback</label><label><input type="checkbox" data-key="Phase 3: React-useRef"> useRef</label><label><input type="checkbox" data-key="Phase 3: React-useLayoutEffect"> useLayoutEffect</label><label><input type="checkbox" data-key="Phase 3: React-Custom Hooks"> Custom Hooks</label><label><input type="checkbox" data-key="Phase 3: React-React.memo"> React.memo</label><label><input type="checkbox" data-key="Phase 3: React-Code Splitting"> Code Splitting</label><label><input type="checkbox" data-key="Phase 3: React-Lazy Loading"> Lazy Loading</label><label><input type="checkbox" data-key="Phase 3: React-Suspense"> Suspense</label><label><input type="checkbox" data-key="Phase 3: React-Memoization"> Memoization</label><label><input type="checkbox" data-key="Phase 3: React-Bundle Optimization"> Bundle Optimization</label><label><input type="checkbox" data-key="Phase 3: React-React Profiler"> React Profiler</label><label><input type="checkbox" data-key="Phase 3: React-Context API"> Context API</label><label><input type="checkbox" data-key="Phase 3: React-Redux"> Redux</label><label><input type="checkbox" data-key="Phase 3: React-Redux Toolkit"> Redux Toolkit</label><label><input type="checkbox" data-key="Phase 3: React-Zustand"> Zustand</label><label><input type="checkbox" data-key="Phase 3: React-React Query"> React Query</label><label><input type="checkbox" data-key="Phase 3: React-Query Keys"> Query Keys</label><label><input type="checkbox" data-key="Phase 3: React-Caching"> Caching</label><label><input type="checkbox" data-key="Phase 3: React-Invalidation"> Invalidation</label><label><input type="checkbox" data-key="Phase 3: React-Mutations"> Mutations</label><label><input type="checkbox" data-key="Phase 3: React-Optimistic Updates"> Optimistic Updates</label><label><input type="checkbox" data-key="Phase 3: React-Infinite Query"> Infinite Query</label><label><input type="checkbox" data-key="Phase 3: React-Prefetching"> Prefetching</label><label><input type="checkbox" data-key="Phase 3: React-Compound Components"> Compound Components</label><label><input type="checkbox" data-key="Phase 3: React-HOC"> HOC</label><label><input type="checkbox" data-key="Phase 3: React-Render Props"> Render Props</label><label><input type="checkbox" data-key="Phase 3: React-Error Boundaries"> Error Boundaries</label><label><input type="checkbox" data-key="Phase 3: React-Portals"> Portals</label><label><input type="checkbox" data-key="Phase 3: React-Micro Frontend"> Micro Frontend</label><label><input type="checkbox" data-key="Phase 3: React-Module Federation"> Module Federation</label><label><input type="checkbox" data-key="Phase 3: React-Server Components"> Server Components</label><label><input type="checkbox" data-key="Phase 3: React-Actions"> Actions</label><label><input type="checkbox" data-key="Phase 3: React-use()"> use()</label><label><input type="checkbox" data-key="Phase 3: React-Streaming"> Streaming</label><label><input type="checkbox" data-key="Phase 3: React-Suspense Improvements"> Suspense Improvements</label></div></details><details open><summary>Phase 4: Node.js</summary><div class="items"><label><input type="checkbox" data-key="Phase 4: Node.js-Event Loop"> Event Loop</label><label><input type="checkbox" data-key="Phase 4: Node.js-Worker Threads"> Worker Threads</label><label><input type="checkbox" data-key="Phase 4: Node.js-Streams"> Streams</label><label><input type="checkbox" data-key="Phase 4: Node.js-Buffers"> Buffers</label><label><input type="checkbox" data-key="Phase 4: Node.js-Cluster"> Cluster</label><label><input type="checkbox" data-key="Phase 4: Node.js-Child Process"> Child Process</label><label><input type="checkbox" data-key="Phase 4: Node.js-Express.js"> Express.js</label><label><input type="checkbox" data-key="Phase 4: Node.js-Middleware"> Middleware</label><label><input type="checkbox" data-key="Phase 4: Node.js-Authentication"> Authentication</label><label><input type="checkbox" data-key="Phase 4: Node.js-Authorization"> Authorization</label><label><input type="checkbox" data-key="Phase 4: Node.js-JWT"> JWT</label><label><input type="checkbox" data-key="Phase 4: Node.js-OAuth"> OAuth</label><label><input type="checkbox" data-key="Phase 4: Node.js-RBAC"> RBAC</label><label><input type="checkbox" data-key="Phase 4: Node.js-API Versioning"> API Versioning</label><label><input type="checkbox" data-key="Phase 4: Node.js-Caching"> Caching</label><label><input type="checkbox" data-key="Phase 4: Node.js-Compression"> Compression</label><label><input type="checkbox" data-key="Phase 4: Node.js-Rate Limiting"> Rate Limiting</label><label><input type="checkbox" data-key="Phase 4: Node.js-Pagination"> Pagination</label><label><input type="checkbox" data-key="Phase 4: Node.js-API Optimization"> API Optimization</label><label><input type="checkbox" data-key="Phase 4: Node.js-CORS"> CORS</label><label><input type="checkbox" data-key="Phase 4: Node.js-CSRF"> CSRF</label><label><input type="checkbox" data-key="Phase 4: Node.js-XSS"> XSS</label><label><input type="checkbox" data-key="Phase 4: Node.js-SQL Injection"> SQL Injection</label><label><input type="checkbox" data-key="Phase 4: Node.js-Helmet"> Helmet</label><label><input type="checkbox" data-key="Phase 4: Node.js-OWASP Top 10"> OWASP Top 10</label></div></details><details open><summary>Phase 5: Database</summary><div class="items"><label><input type="checkbox" data-key="Phase 5: Database-Joins"> Joins</label><label><input type="checkbox" data-key="Phase 5: Database-Indexes"> Indexes</label><label><input type="checkbox" data-key="Phase 5: Database-Query Optimization"> Query Optimization</label><label><input type="checkbox" data-key="Phase 5: Database-Execution Plan"> Execution Plan</label><label><input type="checkbox" data-key="Phase 5: Database-Normalization"> Normalization</label><label><input type="checkbox" data-key="Phase 5: Database-Transactions"> Transactions</label><label><input type="checkbox" data-key="Phase 5: Database-Locks"> Locks</label><label><input type="checkbox" data-key="Phase 5: Database-Deadlocks"> Deadlocks</label><label><input type="checkbox" data-key="Phase 5: Database-CTE"> CTE</label><label><input type="checkbox" data-key="Phase 5: Database-Window Functions"> Window Functions</label><label><input type="checkbox" data-key="Phase 5: Database-Partitioning"> Partitioning</label><label><input type="checkbox" data-key="Phase 5: Database-Materialized Views"> Materialized Views</label><label><input type="checkbox" data-key="Phase 5: Database-JSONB"> JSONB</label><label><input type="checkbox" data-key="Phase 5: Database-ER Diagram"> ER Diagram</label><label><input type="checkbox" data-key="Phase 5: Database-One-to-One"> One-to-One</label><label><input type="checkbox" data-key="Phase 5: Database-One-to-Many"> One-to-Many</label><label><input type="checkbox" data-key="Phase 5: Database-Many-to-Many"> Many-to-Many</label><label><input type="checkbox" data-key="Phase 5: Database-Sharding"> Sharding</label><label><input type="checkbox" data-key="Phase 5: Database-Replication"> Replication</label></div></details><details open><summary>Phase 6: Redis</summary><div class="items"><label><input type="checkbox" data-key="Phase 6: Redis-Data Structures"> Data Structures</label><label><input type="checkbox" data-key="Phase 6: Redis-TTL"> TTL</label><label><input type="checkbox" data-key="Phase 6: Redis-Expiry"> Expiry</label><label><input type="checkbox" data-key="Phase 6: Redis-Caching"> Caching</label><label><input type="checkbox" data-key="Phase 6: Redis-Session Store"> Session Store</label><label><input type="checkbox" data-key="Phase 6: Redis-Distributed Lock"> Distributed Lock</label><label><input type="checkbox" data-key="Phase 6: Redis-Pub/Sub"> Pub/Sub</label><label><input type="checkbox" data-key="Phase 6: Redis-Rate Limiting"> Rate Limiting</label><label><input type="checkbox" data-key="Phase 6: Redis-Queue"> Queue</label></div></details><details open><summary>Phase 7: System Design</summary><div class="items"><label><input type="checkbox" data-key="Phase 7: System Design-Parking System"> Parking System</label><label><input type="checkbox" data-key="Phase 7: System Design-URL Shortener"> URL Shortener</label><label><input type="checkbox" data-key="Phase 7: System Design-Notification System"> Notification System</label><label><input type="checkbox" data-key="Phase 7: System Design-Chat Application"> Chat Application</label><label><input type="checkbox" data-key="Phase 7: System Design-Payment Gateway"> Payment Gateway</label><label><input type="checkbox" data-key="Phase 7: System Design-E-Commerce"> E-Commerce</label><label><input type="checkbox" data-key="Phase 7: System Design-Food Delivery"> Food Delivery</label><label><input type="checkbox" data-key="Phase 7: System Design-Uber"> Uber</label><label><input type="checkbox" data-key="Phase 7: System Design-WhatsApp"> WhatsApp</label><label><input type="checkbox" data-key="Phase 7: System Design-YouTube"> YouTube</label><label><input type="checkbox" data-key="Phase 7: System Design-Ticket Booking"> Ticket Booking</label><label><input type="checkbox" data-key="Phase 7: System Design-Load Balancer"> Load Balancer</label><label><input type="checkbox" data-key="Phase 7: System Design-CDN"> CDN</label><label><input type="checkbox" data-key="Phase 7: System Design-Caching"> Caching</label><label><input type="checkbox" data-key="Phase 7: System Design-Database Scaling"> Database Scaling</label><label><input type="checkbox" data-key="Phase 7: System Design-Message Queue"> Message Queue</label><label><input type="checkbox" data-key="Phase 7: System Design-Event Driven Architecture"> Event Driven Architecture</label><label><input type="checkbox" data-key="Phase 7: System Design-CQRS"> CQRS</label><label><input type="checkbox" data-key="Phase 7: System Design-Saga Pattern"> Saga Pattern</label></div></details><details open><summary>Phase 8: Microservices</summary><div class="items"><label><input type="checkbox" data-key="Phase 8: Microservices-API Gateway"> API Gateway</label><label><input type="checkbox" data-key="Phase 8: Microservices-Service Discovery"> Service Discovery</label><label><input type="checkbox" data-key="Phase 8: Microservices-Circuit Breaker"> Circuit Breaker</label><label><input type="checkbox" data-key="Phase 8: Microservices-Distributed Transactions"> Distributed Transactions</label><label><input type="checkbox" data-key="Phase 8: Microservices-Event Driven Design"> Event Driven Design</label><label><input type="checkbox" data-key="Phase 8: Microservices-Kafka"> Kafka</label><label><input type="checkbox" data-key="Phase 8: Microservices-RabbitMQ"> RabbitMQ</label><label><input type="checkbox" data-key="Phase 8: Microservices-Communication Patterns"> Communication Patterns</label></div></details><details open><summary>Phase 9: DevOps</summary><div class="items"><label><input type="checkbox" data-key="Phase 9: DevOps-Docker"> Docker</label><label><input type="checkbox" data-key="Phase 9: DevOps-Dockerfile"> Dockerfile</label><label><input type="checkbox" data-key="Phase 9: DevOps-Multi-stage Build"> Multi-stage Build</label><label><input type="checkbox" data-key="Phase 9: DevOps-Docker Compose"> Docker Compose</label><label><input type="checkbox" data-key="Phase 9: DevOps-Kubernetes"> Kubernetes</label><label><input type="checkbox" data-key="Phase 9: DevOps-Pod"> Pod</label><label><input type="checkbox" data-key="Phase 9: DevOps-Deployment"> Deployment</label><label><input type="checkbox" data-key="Phase 9: DevOps-Service"> Service</label><label><input type="checkbox" data-key="Phase 9: DevOps-ConfigMap"> ConfigMap</label><label><input type="checkbox" data-key="Phase 9: DevOps-Secret"> Secret</label><label><input type="checkbox" data-key="Phase 9: DevOps-Ingress"> Ingress</label><label><input type="checkbox" data-key="Phase 9: DevOps-HPA"> HPA</label><label><input type="checkbox" data-key="Phase 9: DevOps-CI/CD"> CI/CD</label><label><input type="checkbox" data-key="Phase 9: DevOps-GitHub Actions"> GitHub Actions</label><label><input type="checkbox" data-key="Phase 9: DevOps-Jenkins"> Jenkins</label><label><input type="checkbox" data-key="Phase 9: DevOps-GitLab CI"> GitLab CI</label></div></details><details open><summary>Phase 10: Architecture</summary><div class="items"><label><input type="checkbox" data-key="Phase 10: Architecture-Singleton"> Singleton</label><label><input type="checkbox" data-key="Phase 10: Architecture-Factory"> Factory</label><label><input type="checkbox" data-key="Phase 10: Architecture-Strategy"> Strategy</label><label><input type="checkbox" data-key="Phase 10: Architecture-Observer"> Observer</label><label><input type="checkbox" data-key="Phase 10: Architecture-Adapter"> Adapter</label><label><input type="checkbox" data-key="Phase 10: Architecture-Repository"> Repository</label><label><input type="checkbox" data-key="Phase 10: Architecture-SOLID"> SOLID</label><label><input type="checkbox" data-key="Phase 10: Architecture-DRY"> DRY</label><label><input type="checkbox" data-key="Phase 10: Architecture-KISS"> KISS</label><label><input type="checkbox" data-key="Phase 10: Architecture-YAGNI"> YAGNI</label></div></details><details open><summary>Phase 11: Leadership Round</summary><div class="items"><label><input type="checkbox" data-key="Phase 11: Leadership Round-Conflict Resolution"> Conflict Resolution</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Sprint Planning"> Sprint Planning</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Estimation"> Estimation</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Mentoring Developers"> Mentoring Developers</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Code Review Strategy"> Code Review Strategy</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Production Issue Handling"> Production Issue Handling</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Stakeholder Management"> Stakeholder Management</label><label><input type="checkbox" data-key="Phase 11: Leadership Round-Release Planning"> Release Planning</label></div></details><details open><summary>Phase 12: DSA</summary><div class="items"><label><input type="checkbox" data-key="Phase 12: DSA-Two Sum"> Two Sum</label><label><input type="checkbox" data-key="Phase 12: DSA-Sliding Window"> Sliding Window</label><label><input type="checkbox" data-key="Phase 12: DSA-Prefix Sum"> Prefix Sum</label><label><input type="checkbox" data-key="Phase 12: DSA-Anagram"> Anagram</label><label><input type="checkbox" data-key="Phase 12: DSA-Longest Substring"> Longest Substring</label><label><input type="checkbox" data-key="Phase 12: DSA-Palindrome"> Palindrome</label><label><input type="checkbox" data-key="Phase 12: DSA-Reverse Linked List"> Reverse Linked List</label><label><input type="checkbox" data-key="Phase 12: DSA-Detect Cycle"> Detect Cycle</label><label><input type="checkbox" data-key="Phase 12: DSA-DFS"> DFS</label><label><input type="checkbox" data-key="Phase 12: DSA-BFS"> BFS</label><label><input type="checkbox" data-key="Phase 12: DSA-Binary Search Tree"> Binary Search Tree</label><label><input type="checkbox" data-key="Phase 12: DSA-Topological Sort"> Topological Sort</label><label><input type="checkbox" data-key="Phase 12: DSA-Shortest Path"> Shortest Path</label></div></details>
 
 <script>
-const data = {
-    "JavaScript": [
-        "Closures",
-        "Event Loop",
-        "Promises",
-        "Async Await",
-        "Debounce",
-        "Throttle",
-        "Prototype",
-        "Call Apply Bind",
-        "Memory Leak",
-        "Polyfills"
-    ],
-    "TypeScript": [
-        "Generics",
-        "Interfaces",
-        "Utility Types",
-        "Type Guards",
-        "Decorators"
-    ],
-    "React": [
-        "Hooks",
-        "Redux",
-        "Redux Toolkit",
-        "React Query",
-        "Performance",
-        "Context API",
-        "Fiber",
-        "Reconciliation",
-        "Micro Frontend"
-    ],
-    "NodeJS": [
-        "Event Loop",
-        "Streams",
-        "Worker Threads",
-        "JWT",
-        "RBAC",
-        "Security",
-        "Rate Limiting"
-    ],
-    "Database": [
-        "Joins",
-        "Indexes",
-        "Transactions",
-        "Query Optimization",
-        "PostgreSQL"
-    ],
-    "Redis": [
-        "Caching",
-        "PubSub",
-        "Distributed Lock"
-    ],
-    "System Design": [
-        "URL Shortener",
-        "Chat System",
-        "Notification System",
-        "Load Balancer",
-        "Microservices"
-    ],
-    "DevOps": [
-        "Docker",
-        "Kubernetes",
-        "CI/CD"
-    ]
-};
+const STORAGE_KEY='interviewTracker';
 
-const container = document.getElementById("container");
-
-function render() {
-    container.innerHTML = "";
-
-    Object.entries(data).forEach(([section, topics]) => {
-        const div = document.createElement("div");
-        div.className = "section";
-
-        div.innerHTML = `<h2>${section}</h2>`;
-
-        topics.forEach(topic => {
-            const key = `${section}-${topic}`;
-            const checked = localStorage.getItem(key) === "true";
-
-            const label = document.createElement("label");
-
-            label.innerHTML = `
-                <input type="checkbox"
-                    ${checked ? "checked" : ""}
-                    onchange="save('${key}', this.checked)">
-                ${topic}
-            `;
-
-            div.appendChild(label);
-        });
-
-        container.appendChild(div);
-    });
-
-    updateProgress();
+function loadData(){
+ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
 }
 
-function save(key, value) {
-    localStorage.setItem(key, value);
-    updateProgress();
+function saveData(data){
+ localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
 }
 
-function updateProgress() {
-    let total = 0;
-    let completed = 0;
-
-    Object.entries(data).forEach(([section, topics]) => {
-        topics.forEach(topic => {
-            total++;
-            const key = `${section}-${topic}`;
-
-            if (localStorage.getItem(key) === "true") {
-                completed++;
-            }
-        });
-    });
-
-    const percent = Math.round((completed / total) * 100);
-    document.getElementById("progress").innerText =
-        `${percent}% (${completed}/${total})`;
+function updateProgress(){
+ const boxes=[...document.querySelectorAll('input[type=checkbox]')];
+ const checked=boxes.filter(x=>x.checked).length;
+ document.getElementById('progress').innerText=Math.round((checked/boxes.length)*100)+'% ('+checked+'/'+boxes.length+')';
 }
 
-render();
+const data=loadData();
+document.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+ const key=cb.dataset.key;
+ cb.checked=!!data[key];
+ cb.addEventListener('change',()=>{
+   const d=loadData();
+   d[key]=cb.checked;
+   saveData(d);
+   updateProgress();
+ });
+});
+
+document.getElementById('search').addEventListener('input',e=>{
+ const q=e.target.value.toLowerCase();
+ document.querySelectorAll('label').forEach(l=>{
+   l.style.display=l.textContent.toLowerCase().includes(q)?'block':'none';
+ });
+});
+
+function resetProgress(){
+ localStorage.removeItem(STORAGE_KEY);
+ location.reload();
+}
+
+function exportData(){
+ const blob=new Blob([localStorage.getItem(STORAGE_KEY)||'{}'],{type:'application/json'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='interview-progress.json';
+ a.click();
+}
+
+document.getElementById('importFile').addEventListener('change',e=>{
+ const file=e.target.files[0];
+ const reader=new FileReader();
+ reader.onload=function(x){
+   localStorage.setItem(STORAGE_KEY,x.target.result);
+   location.reload();
+ }
+ reader.readAsText(file);
+});
+
+updateProgress();
 </script>
-
 </body>
 </html>
